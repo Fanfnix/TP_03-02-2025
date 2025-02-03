@@ -1,7 +1,7 @@
 #ifndef FCT
 #define FCT
 
-#define NB_NOTE 7
+#define NB_NOTE 12
 
 struct Note {
     float freq;

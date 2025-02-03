@@ -4,19 +4,12 @@
 
 #include "fct.h"
 
-#define mu_assert(message, test) do {if(!test) return message;} while(0)
-
-#define mu_run_test(test) do {char * message = test(); test_run++; if(message) return message;} while (0)
-
-int test_run = 0;
-
 int main() {
-    float frequences[NB_NOTE] = {329.63f, 349.23f, 369.99f, 392.00f, 415.30f, 440.00f, 466.16f};
+    float frequences[NB_NOTE] =  {261.63, 277.18, 293.66, 311.13, 329.63, 349.23, 369.99, 392.00, 415.30, 440.00, 466.16, 493.88};
     
     struct Note ** piano = malloc(NB_NOTE*sizeof(struct Note *));
     for (int i = 0; i < NB_NOTE; i++) {
         piano[i] = creerNote(frequences[i], 1);
-        printf("F = %f\n", piano[i]->freq);
     }
 
     initscr();
