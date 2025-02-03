@@ -26,6 +26,7 @@ int libNote(struct Note ** note) {
 
 void simulerPiano(struct Note ** piano) {
     int pressed;
+    char * sys;
     while ((pressed = getch()) != 'q') {
         switch (pressed) {
             case 'c': printw("DO : %f\n", piano[0]->freq); break;

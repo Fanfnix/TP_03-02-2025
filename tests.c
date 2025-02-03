@@ -12,13 +12,13 @@ int test_run = 0;
 
 static char * test_creerNote_freq() {
     struct Note * result = creerNote(100, 1);
-    mu_assert("ERR : 11\n", result->freq == 100);
+    mu_assert("ERR 11\n", result->freq == 100);
     return 0;
 }
 
 static char * test_creerNote_duree() {
     struct Note * result = creerNote(100, 1);
-    mu_assert("ERR : 12\n", result->duree == 1);
+    mu_assert("ERR 12\n", result->duree == 1);
     return 0;
 }
 
@@ -27,7 +27,7 @@ static char * test_libNote() {
     for (int i = 0; i < NB_NOTE; i++) {
         result[i] = creerNote(0, 0);
     }
-    mu_assert("ERR : 21\n", libNote(result) == NULL);
+    mu_assert("ERR 21\n", libNote(result) == NULL);
     return 0;
 }
 
