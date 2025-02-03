@@ -36,7 +36,6 @@ void simulerPiano(struct Note ** piano) {
             case 'g': printw("SOL : %f\n", piano[7]->freq); break;
             case 'a': printw("LA : %f\n", piano[9]->freq); break;
             case 'b': printw("SI : %f\n", piano[11]->freq); break;
-            default: pressed = 'q'; break;
         }
     }
 }
