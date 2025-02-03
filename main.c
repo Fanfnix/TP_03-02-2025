@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <ncurses.h>
+
 #include "fct.h"
 
 #define mu_assert(message, test) do {if(!test) return message;} while(0)
@@ -8,67 +10,25 @@
 
 int test_run = 0;
 
-static const char * categorize_age(int age) {
-    if (age < 0) {
-        return "Invalid age";
-    }
-    else if (age < 13) {
-        return "Child";
-    }
-    else if (age < 20) {
-        return "Teenager";
-    }
-    else if (age < 65) {
-        return "Adult";
-    }
-    else {
-        return "Senior";
-    }
-}
-
-static char * test_categorize_age_neg() {
-    mu_assert("ERR : categorize(-1) != 'Invalid age'\n", categorize_age(-1) == "Invalid age");
-    return 0;
-}
-
-static char * test_categorize_age_child() {
-    mu_assert("ERR : categorize(10) != 'Child'\n", categorize_age(10) == "Child");
-    return 0;
-}
-
-static char * test_categorize_age_teen() {
-    mu_assert("ERR : categorize(18) != 'Teenager'\n", categorize_age(18) == "Teenager");
-    return 0;
-}
-
-static char * test_categorize_age_adult() {
-    mu_assert("ERR : categorize(40) != 'Adult'\n", categorize_age(40) == "Adult");
-    return 0;
-}
-
-static char * test_categorize_age_senior() {
-    mu_assert("ERR : categorize(90) != 'Senior'\n", categorize_age(90) == "Senior");
-    return 0;
-}
-
-static char * all_test() {
-    mu_run_test(test_categorize_age_neg);
-    mu_run_test(test_categorize_age_child);
-    mu_run_test(test_categorize_age_teen);
-    mu_run_test(test_categorize_age_adult);
-    mu_run_test(test_categorize_age_senior);
-    return 0;
-}
-
 int main() {
-    char * result = all_test();
-    if (result != 0) {
-        printf("%s\n", result);
+    float frequences[NB_NOTE] = {329.63f, 349.23f, 369.99f, 392.00f, 415.30f, 440.00f, 466.16f};
+    
+    struct Note ** piano = malloc(NB_NOTE*sizeof(struct Note *));
+    for (int i = 0; i < NB_NOTE; i++) {
+        piano[i] = creerNote(frequences[i], 1);
+        printf("F = %f\n", piano[i]->freq);
     }
-    else {
-        printf("All_test passé\n");
+
+    initscr();
+    noecho();
+
+    simulerPiano(piano);
+
+    endwin();
+
+    if(!libNote(piano)) {
+        printf("ERROR : libNote failed\n");
     }
-    printf("TEST_RUN = %d\n", test_run);
 
     return 0;
 }
